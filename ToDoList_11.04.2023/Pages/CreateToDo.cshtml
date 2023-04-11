@@ -1,0 +1,12 @@
+﻿@page
+@model ToDoList_11._04._2023.Pages.CreateToDoModel
+@{
+    ViewData["Title"] = "To Do Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <input type="text" name="title" id="title" placeholder="Enter Title"/>
+    <button type="submit">Create</button>
+</form>

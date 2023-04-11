@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "To Do List";
+}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Is Done</th>
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach(var toDo in Model.toDoList)
+        {
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>@toDo.Title</td>
+                <td>@toDo.Date.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
