@@ -8,6 +8,8 @@ namespace ToDoList_11._04._2023.Pages
     public class CreateToDoModel : PageModel
     {
         private readonly ToDoService _toDoService;
+        [BindProperty]
+        public ToDo Input { get; set; }
 
         public CreateToDoModel(ToDoService toDoService)
         {
@@ -19,9 +21,12 @@ namespace ToDoList_11._04._2023.Pages
             return Page();
         }
 
-        public IActionResult OnPost(ToDo toDo)
+        public IActionResult OnPost()
         {
-            _toDoService.AddToDo(toDo);
+            if (!ModelState.IsValid)
+                return Page();
+
+            _toDoService.AddToDo(Input);
             return RedirectToPage("Index");
         }
     }

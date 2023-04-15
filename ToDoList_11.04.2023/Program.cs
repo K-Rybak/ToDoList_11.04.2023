@@ -4,7 +4,7 @@ using ToDoList_11._04._2023.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connString = builder.Configuration.GetConnectionString("DefaultConnection");
+string? connString = builder.Configuration.GetConnectionString("SqlLiteConnection");
 
 // Add services to the container.
 builder.Services.AddRazorPages();
