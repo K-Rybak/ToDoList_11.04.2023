@@ -23,5 +23,11 @@ namespace ToDoList_11._04._2023.Pages
             toDoList = _toDoService.GetToDoList();
             return Page();
         }
+
+        public IActionResult OnPostChangeIsDone([FromBody]int id, [FromBody]bool isDone)
+        {
+            _toDoService.change(id, isDone);
+            return new JsonResult("ok");
+        }
     }
 }

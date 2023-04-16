@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@Html.AntiForgeryToken()
 @{
     ViewData["Title"] = "To Do List";
 }
@@ -15,12 +16,52 @@
   <tbody>
         @foreach(var toDo in Model.toDoList)
         {
-            <tr>
-                <td><input type="checkbox"/></td>
+            <tr id="@toDo.Id">
+                <td><input type="checkbox" id="TodoMark"/></td>
                 <td>@toDo.Title</td>
-                <td>@toDo.Date.ToShortDateString()</td>
+                <td>@toDo.Date.ToString()</td>
             </tr>
         }
     </tbody>
 </table>
 <a href="CreateToDo" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add new Todo</a>
+
+@section Scripts{
+    <script>
+        $('#TodoMark').on('change', function(e)  {
+            console.log($('#TodoMark'))
+            let isDone = $('#TodoMark').is(':checked')
+            console.log(isDone)
+            console.log($('#TodoMark').closest('tr').attr('id'))
+            let params = {
+                'id': Number($('#TodoMark').closest('tr').attr('id')),
+                'isDone': isDone
+            }
+            console.log(JSON.stringify(params))
+            $.ajax({
+                type: 'post',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                url: '/?handler=ChangeIsDone',
+                contentType: "application/json",
+                data: JSON.stringify(params),
+                success: function () {
+                    if (isDone){
+                        $('#TodoMark').css('text-decoration', 'line-though')
+                    } else {
+                        $('#TodoMark').css('text-decoration', 'none')
+                    }
+                    
+                },
+                error: function (xhr, status, error) {    
+                    console.log(xhr.responseText);
+                   console.log(status);
+                   console.log(error);
+                }
+            })
+            
+        })
+    </script>
+}

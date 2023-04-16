@@ -38,5 +38,17 @@ namespace ToDoList_11._04._2023.Services
             appDbContext.ToDo.Add(toDo);
             appDbContext.SaveChanges();
         }
+
+        public void change(int id, bool isDone)
+        {
+            var item = appDbContext.ToDo
+                .SingleOrDefault(x => x.Id == id);
+
+            if  (item != null) 
+            { 
+                item.isDone = isDone;
+                appDbContext.SaveChanges();
+            }
+        }
     }
 }

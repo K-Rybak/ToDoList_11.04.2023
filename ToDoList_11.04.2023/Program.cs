@@ -10,6 +10,7 @@ string? connString = builder.Configuration.GetConnectionString("SqlLiteConnectio
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connString));
 builder.Services.AddScoped<ToDoService>();
+builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
 var app = builder.Build();
 
