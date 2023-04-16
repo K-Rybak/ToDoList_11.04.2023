@@ -1,6 +1,6 @@
 ﻿@page
 @model IndexModel
-@Html.AntiForgeryToken()
+
 @{
     ViewData["Title"] = "To Do List";
 }
@@ -17,7 +17,11 @@
         @foreach(var toDo in Model.toDoList)
         {
             <tr id="@toDo.Id">
-                <td><input type="checkbox" id="TodoMark"/></td>
+                
+                <td>
+                    @Html.AntiForgeryToken()
+                    <input type="checkbox" id="TodoMark"/>
+                </td>
                 <td>@toDo.Title</td>
                 <td>@toDo.Date.ToString()</td>
             </tr>
@@ -48,6 +52,7 @@
                 contentType: "application/json",
                 data: JSON.stringify(params),
                 success: function () {
+                    
                     if (isDone){
                         $('#TodoMark').css('text-decoration', 'line-though')
                     } else {
@@ -56,7 +61,7 @@
                     
                 },
                 error: function (xhr, status, error) {    
-                    console.log(xhr.responseText);
+                   console.log(xhr.responseText);
                    console.log(status);
                    console.log(error);
                 }

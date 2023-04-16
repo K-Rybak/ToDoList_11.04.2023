@@ -11,6 +11,8 @@ namespace ToDoList_11._04._2023.Pages
         private readonly ToDoService _toDoService;
         
         public List<ToDo> toDoList { get; set; }
+        [FromBody]
+        public IsDone IsDoneModel { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, ToDoService toDoService)
         {
@@ -24,10 +26,16 @@ namespace ToDoList_11._04._2023.Pages
             return Page();
         }
 
-        public IActionResult OnPostChangeIsDone([FromBody]int id, [FromBody]bool isDone)
+        public IActionResult OnPostChangeIsDone()
         {
-            _toDoService.change(id, isDone);
+            _toDoService.change(IsDoneModel.id, IsDoneModel.isDone);
             return new JsonResult("ok");
+        }
+
+        public class IsDone
+        {
+            public int id { get; set; }
+            public bool isDone { get; set; }
         }
     }
 }
