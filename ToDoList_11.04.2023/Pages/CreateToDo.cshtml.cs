@@ -9,6 +9,9 @@ namespace ToDoList_11._04._2023.Pages
     {
         private readonly ToDoService _toDoService;
 
+        [BindProperty]
+        public ToDo toDo { get; set; }
+
         public CreateToDoModel(ToDoService toDoService)
         {
             _toDoService = toDoService;
@@ -19,8 +22,11 @@ namespace ToDoList_11._04._2023.Pages
             return Page();
         }
 
-        public IActionResult OnPost(ToDo toDo)
+        public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+                return Page();
+
             _toDoService.AddToDo(toDo);
             return RedirectToPage("Index");
         }

@@ -8,7 +8,8 @@ string connString = builder.Configuration.GetConnectionString("DefaultConnection
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connString));
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlServer(connString));
 builder.Services.AddScoped<ToDoService>();
 
 var app = builder.Build();

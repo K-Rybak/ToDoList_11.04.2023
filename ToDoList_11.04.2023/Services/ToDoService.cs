@@ -38,5 +38,17 @@ namespace ToDoList_11._04._2023.Services
             appDbContext.ToDo.Add(toDo);
             appDbContext.SaveChanges();
         }
+
+        public void ChageIsDone(int id, bool isDone)
+        {
+            var item = appDbContext.ToDo
+                .Find(id);
+
+            if (item != null)
+            {
+                item.isDone = isDone;
+                appDbContext.SaveChanges();
+            }
+        }
     }
 }
