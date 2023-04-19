@@ -2,19 +2,20 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToDoList_11._04._2023.Models;
 using ToDoList_11._04._2023.Services;
+using ToDoList_11._04._2023.Services.Interfaces;
 
 namespace ToDoList_11._04._2023.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly ToDoService _toDoService;
+        private readonly IToDoService _toDoService;
         
         public List<ToDo> toDoList { get; set; }
         [BindProperty]
         public IsDoneModel Input { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ToDoService toDoService)
+        public IndexModel(ILogger<IndexModel> logger, IToDoService toDoService)
         {
             _logger = logger;
             _toDoService = toDoService;
@@ -26,11 +27,11 @@ namespace ToDoList_11._04._2023.Pages
             return Page();
         }
 
-        public IActionResult OnPostIsDone()
-        {
-            _toDoService.ChageIsDone(Input.Id, Input.IsDone);
-            return new JsonResult("ok");
-        }
+        //public IActionResult OnPostIsDone()
+        //{
+        //    _toDoService.ChageIsDone(Input.Id, Input.IsDone);
+        //    return new JsonResult("ok");
+        //}
 
         public class IsDoneModel
         {

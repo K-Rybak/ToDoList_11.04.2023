@@ -13,20 +13,7 @@ namespace ToDoList_11._04._2023.Services
             this.appDbContext = appDbContext;
         }
 
-        //private List<ToDo> toDos = new List<ToDo>() { new ToDo
-        //{
-        //    Id = 1,
-        //    Title = "First Work",
-        //    Date = DateTime.Now,
-        //    isDone = false
-        //},
-        //new ToDo{
-        //    Id = 2,
-        //    Title = "Second Work",
-        //    Date = DateTime.Now,
-        //    isDone = false
-        //}
-        //};
+
         public List<ToDo> GetToDoList() 
         {
             var toDoList = appDbContext.ToDo.ToList();

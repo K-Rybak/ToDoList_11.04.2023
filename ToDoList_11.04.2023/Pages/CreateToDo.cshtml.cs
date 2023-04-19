@@ -2,17 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToDoList_11._04._2023.Models;
 using ToDoList_11._04._2023.Services;
+using ToDoList_11._04._2023.Services.Interfaces;
 
 namespace ToDoList_11._04._2023.Pages
 {
     public class CreateToDoModel : PageModel
     {
-        private readonly ToDoService _toDoService;
+        private readonly IToDoService _toDoService;
 
         [BindProperty]
         public ToDo toDo { get; set; }
 
-        public CreateToDoModel(ToDoService toDoService)
+        public CreateToDoModel(IToDoService toDoService)
         {
             _toDoService = toDoService;
         }

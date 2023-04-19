@@ -17,7 +17,11 @@
         {
             <tr>
                 @Html.AntiForgeryToken()
-                <td><input type="checkbox" id="@toDo.Id" checked="@toDo.isDone"/></td>
+                <td>
+                    <input type="checkbox" 
+                    id="@toDo.Id" 
+                    checked="@toDo.isDone"/>
+                </td>
                 <td>@toDo.Title</td>
                 <td>@toDo.Date.ToShortDateString()</td>
             </tr>

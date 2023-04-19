@@ -1,6 +1,7 @@
 using ToDoList_11._04._2023.Data;
 using Microsoft.EntityFrameworkCore;
 using ToDoList_11._04._2023.Services;
+using ToDoList_11._04._2023.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(connString));
 
-builder.Services.AddScoped<ToDoService>();
+builder.Services.AddScoped<IToDoService, TesToDoService>();
 
 builder.Services.AddAntiforgery(o => 
     o.HeaderName = "XSRF-TOKEN");
