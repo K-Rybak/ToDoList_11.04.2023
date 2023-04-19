@@ -16,6 +16,7 @@
         @foreach(var toDo in Model.toDoList)
         {
             <tr>
+                @Html.AntiForgeryToken()
                 <td><input type="checkbox" id="@toDo.Id" checked="@toDo.isDone"/></td>
                 <td>@toDo.Title</td>
                 <td>@toDo.Date.ToShortDateString()</td>
@@ -42,8 +43,14 @@
             $.ajax({
                 type: 'post',
                 url: '?handler=IsDone',
+                beforeSend: function (xhr) {
+                  xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
                 data: JSON.stringify(params),
-                success: function(){},
+                success: function(){
+                    console.log('success')
+                },
                 error: function() { }
             })
         })

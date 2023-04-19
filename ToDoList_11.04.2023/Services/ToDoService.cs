@@ -1,9 +1,10 @@
 ﻿using ToDoList_11._04._2023.Data;
 using ToDoList_11._04._2023.Models;
+using ToDoList_11._04._2023.Services.Interfaces;
 
 namespace ToDoList_11._04._2023.Services
 {   
-    public class ToDoService
+    public class ToDoService : IToDoService
     {
         private readonly AppDbContext appDbContext;
 

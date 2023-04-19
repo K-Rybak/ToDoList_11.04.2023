@@ -8,9 +8,14 @@ string connString = builder.Configuration.GetConnectionString("DefaultConnection
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(connString));
+
 builder.Services.AddScoped<ToDoService>();
+
+builder.Services.AddAntiforgery(o => 
+    o.HeaderName = "XSRF-TOKEN");
 
 var app = builder.Build();
 
